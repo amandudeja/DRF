@@ -16,11 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 
+from rest_framework_swagger.views import get_swagger_view
+from users import views
+schema_view = get_swagger_view(title='Aman API')
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('rest-auth/', include('rest_auth.urls')),
-    path('rest-auth/registration/', include('rest_auth.registration.urls'))
+    path('rest-auth/registration/', include('rest_auth.registration.urls')),
+    path('docs/', schema_view),
+    path('signup/',views.UserCreate.as_view())
 
 ]
 
